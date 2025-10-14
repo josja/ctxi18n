@@ -1,4 +1,4 @@
-module github.com/invopop/ctxi18n
+module github.com/josja/ctxi18n
 
 go 1.21
 
