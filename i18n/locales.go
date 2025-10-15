@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/fs"
+	"os"
 	"path/filepath"
 
 	"github.com/invopop/yaml"
@@ -12,6 +13,46 @@ import (
 // Locales is a map of language keys to their respective locale.
 type Locales struct {
 	list []*Locale
+}
+
+// Loads a file from an embedded filesystem.
+func (ls *Locales) LoadEmbeddedFile(src fs.FS, path string) error {
+	file_contents, err := fs.ReadFile(src, path)
+	if err != nil {
+		return fmt.Errorf("reading file '%s': %w", path, err)
+	}
+
+	if err := yaml.Unmarshal(file_contents, ls); err != nil {
+		return fmt.Errorf("unmarshalling file '%s': %w", path, err)
+	}
+
+	return nil
+}
+
+// Loads a file from drive.
+func (ls *Locales) LoadFileFromDrive(path string) error {
+	file_contents, err := os.ReadFile(path)
+	if err != nil {
+		return fmt.Errorf("reading file '%s': %w", path, err)
+	}
+
+	if err := yaml.Unmarshal(file_contents, ls); err != nil {
+		return fmt.Errorf("unmarshalling file '%s': %w", path, err)
+	}
+
+	return nil
+}
+
+// Loads a file that resides next to the executable in the root directory.
+func (ls *Locales) LoadFileFromExecutableRoot(filename string) error {
+	executable, err := os.Executable()
+	if err != nil {
+		panic(err)
+	}
+	rootPath := filepath.Dir(executable)
+	path := fmt.Sprintf("%s/%s", rootPath, filename)
+
+	return ls.LoadFileFromDrive(path)
 }
 
 // Load walks through all the files in the provided File System
@@ -29,16 +70,7 @@ func (ls *Locales) Load(src fs.FS) error {
 			return nil
 		}
 
-		data, err := fs.ReadFile(src, path)
-		if err != nil {
-			return fmt.Errorf("reading file '%s': %w", path, err)
-		}
-
-		if err := yaml.Unmarshal(data, ls); err != nil {
-			return fmt.Errorf("unmarshalling file '%s': %w", path, err)
-		}
-
-		return nil
+		return ls.LoadEmbeddedFile(src, path)
 	})
 }
 

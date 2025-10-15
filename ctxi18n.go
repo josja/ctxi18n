@@ -7,7 +7,7 @@ import (
 	"errors"
 	"io/fs"
 
-	"github.com/josja/ctxi18n/i18n"
+	"github.com/invopop/ctxi18n/i18n"
 )
 
 var (
@@ -34,6 +34,15 @@ func init() {
 // an internal global list of locales ready to use.
 func Load(fs fs.FS) error {
 	return locales.Load(fs)
+}
+
+func LoadFile(src fs.FS, path string) error {
+	return locales.LoadEmbeddedFile(src, path)
+}
+
+// Load a file from application's directory on drive.
+func LoadFromApplicationDir(filename string) error {
+	return locales.LoadFileFromExecutableRoot(filename)
 }
 
 // LoadWithDefault performs the regular load operation, but will merge
