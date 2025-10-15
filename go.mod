@@ -1,6 +1,7 @@
-module github.com/invopop/ctxi18n
+module github.com/josja/ctxi18n
 
-replace github.com/invopop/ctxi18n => github.com/josja/ctxi18n v0.0.0-20251014212415-7cb8ae42feb6
+replace github.com/invopop/ctxi18n/i18n => github.com/josja/ctxi18n/i18n v0.0.0-20251014212415-7cb8ae42feb6
+
 // replace github.com/invopop/ctxi18n => ./
 
 go 1.21
@@ -8,6 +9,7 @@ go 1.21
 toolchain go1.22.1
 
 require (
+	github.com/invopop/ctxi18n v0.9.0
 	github.com/invopop/yaml v0.2.0
 	github.com/stretchr/testify v1.9.0
 )
