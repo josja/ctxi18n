@@ -1,8 +1,8 @@
 module github.com/josja/ctxi18n
 
-replace github.com/invopop/ctxi18n/i18n => github.com/josja/ctxi18n/i18n v0.0.0-20251014212415-7cb8ae42feb6
+// replace github.com/invopop/ctxi18n/i18n => github.com/josja/ctxi18n/i18n v0.0.0-20251014212415-7cb8ae42feb6
 
-// replace github.com/invopop/ctxi18n => ./
+replace github.com/invopop/ctxi18n => ./
 
 go 1.21
 
