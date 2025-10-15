@@ -7,7 +7,7 @@ import (
 	"errors"
 	"io/fs"
 
-	"github.com/invopop/ctxi18n/i18n"
+	"github.com/josja/ctxi18n/i18n"
 )
 
 var (

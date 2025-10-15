@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/invopop/ctxi18n/i18n"
-	"github.com/invopop/ctxi18n/internal/examples"
+	"github.com/josja/ctxi18n/i18n"
+	"github.com/josja/ctxi18n/internal/examples"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

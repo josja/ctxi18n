@@ -3,7 +3,7 @@ package i18n_test
 import (
 	"testing"
 
-	"github.com/invopop/ctxi18n/i18n"
+	"github.com/josja/ctxi18n/i18n"
 	"github.com/stretchr/testify/assert"
 )
 
